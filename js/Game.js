@@ -4,24 +4,27 @@
 
 
 class Game {
-  constructor(missed = 0, phrases = [], activePhrase = null) {
+  constructor(missed = 0, phrases=[], activePhrase = null) {
     this.missed = missed;
-    this.phrases = phrases;
+    this.phrases = this.createPhrases();
     this.activePhrase = activePhrase;
+
   }
+
+
   createPhrases() {
-    return [
-    "may the force be with you",
-    "carpe diem",
-    "To infinity and beyond!",
-    "I am your father",
-    "Why so serious?"
+    return[
+    {phrase:"may the force be with you"},
+    {phrase: "carpe diem"},
+    {phrase:"To infinity and beyond"},
+    {phrase:"I am your father"},
+    {phrase: "Why so serious"}
   ]
   }
 
-    set phrases(methodCall) {
-
-    }
+  getRandomPhrase() {
+    return this.phrases[Math.floor(Math.random() * this.phrases.length)];
+  }
 
 
 }

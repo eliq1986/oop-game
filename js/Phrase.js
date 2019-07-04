@@ -4,9 +4,9 @@
 
 document.querySelector("div#overlay").style.display = "none";
   class Phrase {
-   constructor(phrase) {
+   constructor({ phrase }) {
 
-     this.phrase = phrase.toLowerCase();
+     this.phrase = phrase;
 
    }
 
