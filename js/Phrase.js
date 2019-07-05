@@ -2,10 +2,8 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-document.querySelector("div#overlay").style.display = "none";
   class Phrase {
    constructor({ phrase }) {
-
      this.phrase = phrase;
 
    }
@@ -16,11 +14,11 @@ document.querySelector("div#overlay").style.display = "none";
      phraseSplitted.forEach(letter => {
        const li = document.createElement("li");
        if(letter !== " ") {
-         li.classList.add("letter");
+         li.classList.add("letter", "hide");
          li.textContent = letter;
          phraseContainer.appendChild(li);
        } else {
-         li.classList.add("space");
+         li.classList.add("space", "hide");
          li.textContent = letter;
          phraseContainer.appendChild(li);
        }
@@ -31,6 +29,10 @@ document.querySelector("div#overlay").style.display = "none";
      checkLetter(letterChosen) {
 
 
+     }
+
+     get currentPhrase() {
+       return this.phrase;
      }
 
   }

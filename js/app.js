@@ -4,6 +4,8 @@
 
 
  const game = new Game();
- const randomPhrase = game.getRandomPhrase();
- const displayPhrase = new Phrase(randomPhrase);
- displayPhrase.addPhraseToDisplay();
+
+
+document.querySelector("button#btn__reset").addEventListener("click", ()=> {
+    game.startGame();
+});
