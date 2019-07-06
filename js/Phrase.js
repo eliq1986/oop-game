@@ -4,7 +4,7 @@
 
   class Phrase {
    constructor({ phrase }) {
-     this.phrase = phrase;
+     this.phrase = phrase.toLowerCase();
 
    }
 
@@ -26,10 +26,7 @@
      });
    }
 
-     checkLetter(letterChosen) {
 
-
-     }
 
      get currentPhrase() {
        return this.phrase;

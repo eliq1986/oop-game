@@ -29,11 +29,29 @@ class Game {
     document.querySelector("div#overlay").style.display= displayValue;
   }
 
+  captureLetter(letterClicked) {
+    letterClicked.disabled = true;
+    //letterClicked.classList.add("chosen")
+    return letterClicked;
+  }
+
   startGame() {
     this.displayOverLay("none");
     const phrase = new Phrase(this.getRandomPhrase());
     phrase.addPhraseToDisplay();
     this.activePhrase = phrase.currentPhrase;
+    }
+
+    handleInteraction(letterClicked) {
+    let letterSelected = this.captureLetter(letterClicked);
+    const phrase = this.activePhrase.split("");
+    const lettersFound = phrase.filter(letter => letter === letterClicked.textContent);
+    console.log(lettersFound)
+    if (lettersFound) {
+      console.log("ran errors")
+      letterClicked.classList.add("wrong");
+    }
+
     }
 
 

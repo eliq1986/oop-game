@@ -9,3 +9,7 @@
 document.querySelector("button#btn__reset").addEventListener("click", ()=> {
     game.startGame();
 });
+
+document.querySelector("div#qwerty").addEventListener("click", (event)=> {
+   event.target.tagName === "BUTTON" ? game.handleInteraction(event.target) : null;
+});
