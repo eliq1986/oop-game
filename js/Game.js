@@ -3,13 +3,14 @@
  * Game.js */
 
 
-class Game {
+class Game extends Phrase {
   constructor(missed = 0, phrases=[], activePhrase = null) {
+    super();
     this.missed = missed;
     this.phrases = this.createPhrases();
     this.activePhrase = activePhrase;
-  }
 
+  }
 
   createPhrases() {
     return[
@@ -29,30 +30,67 @@ class Game {
     document.querySelector("div#overlay").style.display= displayValue;
   }
 
-  captureLetter(letterClicked) {
-    letterClicked.disabled = true;
-    //letterClicked.classList.add("chosen")
-    return letterClicked;
+  startGame() {
+    const letters = document.querySelectorAll("div#phrase li");
+    const keyboardLetters = document.querySelectorAll("div#qwerty button");
+    const hearts = document.querySelectorAll("li.tries img");
+    hearts.forEach(heart => heart.src = "../images/liveHeart.png");
+
+    if(letters) {
+      letters.forEach(letter => {
+      const parentNode = letter.parentNode;
+      parentNode.removeChild(letter);
+    });
+    keyboardLetters.forEach(letter => {
+      letter.className = "key";
+      letter.removeAttribute("disabled");
+    });
+    }
+
+    this.displayOverLay("none");
+    const phrase = new Phrase(this.getRandomPhrase().phrase);
+    phrase.addPhraseToDisplay();
+    this.activePhrase = phrase.phrase;
+    }
+
+  handleInteraction(letterToCheck) {
+    console.log(letterToCheck);
+  const a = this.checkLetter(letterToCheck);
+  letterToCheck.setAttribute("disabled", true);
+
+  a ? this.gameOver() : this.removeLife(a);
+
   }
 
-  startGame() {
-    this.displayOverLay("none");
-    const phrase = new Phrase(this.getRandomPhrase());
-    phrase.addPhraseToDisplay();
-    this.activePhrase = phrase.currentPhrase;
+  removeLife(letterFound) {
+    if(!letterFound) {
+     document.querySelectorAll("li.tries img")[this.missed].src = "../images/lostHeart.png";
+      this.missed += 1;
+      this.gameOver(this.missed);
     }
 
-    handleInteraction(letterClicked) {
-    let letterSelected = this.captureLetter(letterClicked);
-    const phrase = this.activePhrase.split("");
-    const lettersFound = phrase.filter(letter => letter === letterClicked.textContent);
-    console.log(lettersFound)
-    if (lettersFound) {
-      console.log("ran errors")
-      letterClicked.classList.add("wrong");
+  }
+
+  gameOver(missed) {
+      const overlay = document.querySelector("div#overlay");
+    if(missed === 5) {
+      this.missed = 0;
+      overlay.style.display = "block";
+      overlay.classList.add("lose");
+
+    } else if(this.checkForWin()) {
+      overlay.style.display = "block";
+      overlay.classList.add("win");
+    }
     }
 
+  checkForWin() {
+    const lettersOnBoard = document.querySelectorAll("li[letter]");
+    const lettersWithShowClass = document.querySelectorAll("li.show");
+    if(lettersWithShowClass.length == lettersOnBoard.length){
+      return true;
     }
-
+     return false;
+  }
 
 }
