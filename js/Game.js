@@ -58,9 +58,12 @@ class Game extends Phrase {
 
       const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
       const letterToDisable = keyboardLetters.filter(letter => letter.textContent == letterToCheck);
-      console.log(letterToDisable.textContent);
-    const z =   this.checkLetter(letterToDisable[0]);
-    z ? this.gameOver() : this.removeLife(z);
+      console.log(letterToDisable[0].className);
+    if(letterToDisable[0].className==="key") {  
+      const z =   this.checkLetter(letterToDisable[0]);
+      z ? this.gameOver() : this.removeLife(z);
+    }
+
     } else {
       const a = this.checkLetter(letterToCheck);
       letterToCheck.setAttribute("disabled", true);
