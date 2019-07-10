@@ -16,6 +16,11 @@ document.querySelector("div#qwerty").addEventListener("click", (event)=> {
 
 
 document.addEventListener("keyup", (event)=> {
-   game.handleInteraction(event.key);
+  console.log(event.key);
+  if(/^[A-Za-z]$/.test(event.key) && document.querySelector("div#overlay").style.display === "none") {
+    console.log("letter inputed");
+     game.handleInteraction(event.key);
+  }
+
 
 });

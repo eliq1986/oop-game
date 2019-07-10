@@ -54,11 +54,19 @@ class Game extends Phrase {
     }
 
   handleInteraction(letterToCheck) {
-    console.log(letterToCheck);
-  const a = this.checkLetter(letterToCheck);
-  letterToCheck.setAttribute("disabled", true);
+    if(!letterToCheck.textContent) {
 
-  a ? this.gameOver() : this.removeLife(a);
+      const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
+      const letterToDisable = keyboardLetters.filter(letter => letter.textContent == letterToCheck);
+      console.log(letterToDisable.textContent);
+    const z =   this.checkLetter(letterToDisable[0]);
+    z ? this.gameOver() : this.removeLife(z);
+    } else {
+      const a = this.checkLetter(letterToCheck);
+      letterToCheck.setAttribute("disabled", true);
+
+      a ? this.gameOver() : this.removeLife(a);
+    }
 
   }
 
