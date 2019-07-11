@@ -33,6 +33,13 @@ class Game extends Phrase {
         ];
     }
 
+    showThanos() {
+      document.querySelector("img.thanos").className ="showThanos";
+      setTimeout(()=> {
+        document.querySelector("img.showThanos").className ="thanos";
+      }, 500)
+    }
+
 
     // method returns random phrase
     getRandomPhrase() {
@@ -108,7 +115,8 @@ class Game extends Phrase {
 
         if (letterToDisable[0].className === "key") {
 
-            const wasLetterFound = this.checkLetter(letterToDisable[0])
+            const wasLetterFound = this.checkLetter(letterToDisable[0]);
+
             wasLetterFound ? this.gameOver() : this.removeLife(wasLetterFound);
 
         }
@@ -145,6 +153,7 @@ class Game extends Phrase {
     // method takes 1 arg a boolean; replaces heart with gray heart if bool is false;
     removeLife(letterFound) {
         if (!letterFound) {
+          this.showThanos();
             document.querySelectorAll("li.tries img")[this.missed].src = "../images/lostHeart.png";
             this.missed += 1;
             this.gameOver(this.missed);
@@ -155,10 +164,13 @@ class Game extends Phrase {
 
     // method takes str arg; adds className to startscreen overlay
     endGameOverLay(winOrLose) {
+      setTimeout(()=> {
         const overlay = document.querySelector("div#overlay");
         overlay.style.display = "block";
         overlay.className = winOrLose;
         document.querySelector("h1#game-over-message").textContent = this[winOrLose];
+      },500);
+
     }
 
 
@@ -169,6 +181,7 @@ class Game extends Phrase {
 
             this.missed = 0;
             this.endGameOverLay("lose");
+
 
         } else if (this.checkForWin()) {
 

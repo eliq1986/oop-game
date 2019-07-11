@@ -1,11 +1,16 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
+
+
 const game = new Game();
+
 
 // listens to start button
 document.querySelector("button#btn__reset").addEventListener("click", () => {
     game.startGame();
+
+
 });
 
 // listens to buttons "clicked" on only
@@ -23,3 +28,15 @@ document.addEventListener("keyup", event => {
     }
 
 });
+
+
+
+// https://stackoverflow.com/questions/50490304/how-to-make-audio-autoplay-on-chrome
+// var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+//   console.log(document.querySelector("#playAudio"));
+//     if(!isChrome){
+//       document.querySelector('#iframeAudio').remove()
+//     }
+//   else {
+//      document.querySelector('#playAudio').remove();//just to make sure that it will not have 2x audio in the background
+//   }

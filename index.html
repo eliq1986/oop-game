@@ -73,8 +73,19 @@
 			</div>
 		</div>
 
+		<div id="thanos-container">
+			<img class="thanos" src="./images/thanos.png" alt="avengers villan">
+		</div>
+
+		<iframe src="audio/funsong.mp3" controls allow="autoplay" loop  style="display:none" id="iframeAudio">
+		</iframe>
+
+		<audio preload="auto" loop  autobuffer id="playAudio">
+	  <source src="./audio/funsong.mp3" />
+	  <source src="./audio/funsong.wav" /> <!-- fallback if no mp3 support in browser
+</audio> -->
 	</body>
-    
+
 	<script type="text/javascript" src="js/Phrase.js"></script>
 	<script type="text/javascript" src="js/Game.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
