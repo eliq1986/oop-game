@@ -12,6 +12,7 @@ class Game extends Phrase {
 
   }
 
+// method returns array of obj; called when obj instantiated
   createPhrases() {
     return[
     { phrase:"may the force be with you"},
@@ -22,30 +23,52 @@ class Game extends Phrase {
   ];
   }
 
+// method returns random phrase
   getRandomPhrase() {
     return this.phrases[Math.floor(Math.random() * this.phrases.length)];
   }
 
+//method accepts 1 arg; display value for start screen
   displayOverLay(displayValue) {
     document.querySelector("div#overlay").style.display= displayValue;
   }
 
-  startGame() {
+//method removes previous letters if they exist
+  removePhraseFromScreen() {
     const letters = document.querySelectorAll("div#phrase li");
-    const keyboardLetters = document.querySelectorAll("div#qwerty button");
-    const hearts = document.querySelectorAll("li.tries img");
-    hearts.forEach(heart => heart.src = "../images/liveHeart.png");
-
     if(letters) {
       letters.forEach(letter => {
       const parentNode = letter.parentNode;
       parentNode.removeChild(letter);
     });
+  }
+  }
+
+  resetHearts() {
+    const hearts = document.querySelectorAll("li.tries img");
+    hearts.forEach(heart => heart.src = "../images/liveHeart.png");
+  }
+
+  resetKeyboard() {
+    const keyboardLetters = document.querySelectorAll("div#qwerty button");
     keyboardLetters.forEach(letter => {
       letter.className = "key";
       letter.removeAttribute("disabled");
     });
-    }
+  }
+
+  gameReset() {
+    this.resetHearts();
+    this.removePhraseFromScreen();
+    this.resetKeyboard();
+  }
+
+// method runs when start button is clicked
+  startGame() {
+
+    this.removePhraseFromScreen();
+    this.resetHearts();
+    this.resetKeyboard();
 
     this.displayOverLay("none");
     const phrase = new Phrase(this.getRandomPhrase().phrase);
@@ -58,8 +81,7 @@ class Game extends Phrase {
 
       const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
       const letterToDisable = keyboardLetters.filter(letter => letter.textContent == letterToCheck);
-      console.log(letterToDisable[0].className);
-    if(letterToDisable[0].className==="key") {  
+    if(letterToDisable[0].className==="key") {
       const z =   this.checkLetter(letterToDisable[0]);
       z ? this.gameOver() : this.removeLife(z);
     }
@@ -87,11 +109,11 @@ class Game extends Phrase {
     if(missed === 5) {
       this.missed = 0;
       overlay.style.display = "block";
-      overlay.classList.add("lose");
+      overlay.className = "lose";
 
     } else if(this.checkForWin()) {
       overlay.style.display = "block";
-      overlay.classList.add("win");
+      overlay.className= "win";
     }
     }
 

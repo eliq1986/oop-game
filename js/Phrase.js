@@ -3,27 +3,14 @@
  * Phrase.js */
 
   class Phrase {
-   constructor( phrase ) {
+   constructor(phrase) {
      this.phrase = phrase;
-
    }
 
    addPhraseToDisplay() {
-     const phraseContainer = document.querySelector("div#phrase ul");
      const phraseSplitted = this.phrase.split("");
        phraseSplitted.forEach(letter => {
-       const li = document.createElement("li");
-       if(letter !== " ") {
-         li.classList.add("letter", "hide");
-         li.textContent = letter;
-         li.setAttribute("letter", letter.toLowerCase());
-         phraseContainer.appendChild(li);
-       } else {
-         li.classList.add("space", "hide");
-         li.textContent = letter;
-         phraseContainer.appendChild(li);
-       }
-
+       this.createAndAppendElement(letter);
      });
    }
 
@@ -37,6 +24,22 @@
        letterToCheck.classList.add("chosen");
        this.showMatchedLetter(letterToCheck.textContent);
        return true;
+     }
+
+   }
+
+   createAndAppendElement(letter) {
+     const phraseContainer = document.querySelector("div#phrase ul");
+     const li = document.createElement("li");
+     if(letter !== " ") {
+       li.classList.add("letter", "hide");
+       li.textContent = letter;
+       li.setAttribute("letter", letter.toLowerCase());
+       phraseContainer.appendChild(li);
+     } else {
+       li.classList.add("space", "hide");
+       li.textContent = letter;
+       phraseContainer.appendChild(li);
      }
 
    }
