@@ -7,6 +7,7 @@
      this.phrase = phrase;
    }
 
+// method takes no arg; appends letters to DOM
    addPhraseToDisplay() {
      const phraseSplitted = this.phrase.split("");
        phraseSplitted.forEach(letter => {
@@ -14,6 +15,8 @@
      });
    }
 
+
+// method takes 1 arg event.target; checks if phrase contains letter selected
    checkLetter(letterToCheck) {
      const phrase = this.activePhrase.toLowerCase().split("");
      const lettersFound = phrase.filter(letter => letter.toLowerCase() === letterToCheck.textContent);
@@ -28,6 +31,8 @@
 
    }
 
+
+// method takes 1 arg a str; takes phrase and appends each letter/space to DOM
    createAndAppendElement(letter) {
      const phraseContainer = document.querySelector("div#phrase ul");
      const li = document.createElement("li");
@@ -44,9 +49,11 @@
 
    }
 
+
+// method takes 1 arg; runs if match letter and changes className => show
      showMatchedLetter(letterToCheck) {
-         const letterThatMatch = document.querySelectorAll(`li[letter=${letterToCheck}]`)
-         letterThatMatch.forEach(letter => letter.className = "show");
+       document.querySelectorAll(`li[letter=${letterToCheck}]`).
+       forEach(letter => letter.className = "show");
      }
 
 
