@@ -28,12 +28,12 @@ class Game extends Phrase {
     return this.phrases[Math.floor(Math.random() * this.phrases.length)];
   }
 
-//method accepts 1 arg; display value for start screen
+// method accepts 1 arg; display value for start screen
   displayOverLay(displayValue) {
     document.querySelector("div#overlay").style.display= displayValue;
   }
 
-//method removes previous letters if they exist
+// method removes previous letters if they exist
   removePhraseFromScreen() {
     const letters = document.querySelectorAll("div#phrase li");
     if(letters) {
@@ -44,11 +44,13 @@ class Game extends Phrase {
   }
   }
 
+// method replaces lostHeart.png to liveHeart.png
   resetHearts() {
     const hearts = document.querySelectorAll("li.tries img");
     hearts.forEach(heart => heart.src = "../images/liveHeart.png");
   }
 
+// method resets keyboard to original form
   resetKeyboard() {
     const keyboardLetters = document.querySelectorAll("div#qwerty button");
     keyboardLetters.forEach(letter => {
@@ -57,11 +59,14 @@ class Game extends Phrase {
     });
   }
 
+
+// method takes no arg; resets hearts, phrase and keyboard
   gameReset() {
     this.resetHearts();
     this.removePhraseFromScreen();
     this.resetKeyboard();
   }
+
 
 // method runs when start button is clicked
   startGame() {
@@ -74,27 +79,49 @@ class Game extends Phrase {
     const phrase = new Phrase(this.getRandomPhrase().phrase);
     phrase.addPhraseToDisplay();
     this.activePhrase = phrase.phrase;
+
     }
 
+  keyboardInteraction(letterToCheck) {
+
+    const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
+    const letterToDisable = keyboardLetters.filter(letter => letter.textContent == letterToCheck);
+    letterToDisable[0].setAttribute("disabled", true);
+
+    if(letterToDisable[0].className === "key") {
+
+    const wasLetterFound = this.checkLetter(letterToDisable[0])
+    wasLetterFound  ? this.gameOver() : this.removeLife(wasLetterFound);
+
+  }
+
+  }
+
+//
+  mouseInteraction(letterToCheck) {
+
+    const wasLetterFound = this.checkLetter(letterToCheck);
+    letterToCheck.setAttribute("disabled", true);
+
+    wasLetterFound ? this.gameOver() : this.removeLife(a);
+  }
+
+// method takes 1 arg event.target
   handleInteraction(letterToCheck) {
+
     if(!letterToCheck.textContent) {
 
-      const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
-      const letterToDisable = keyboardLetters.filter(letter => letter.textContent == letterToCheck);
-    if(letterToDisable[0].className==="key") {
-      const z =   this.checkLetter(letterToDisable[0]);
-      z ? this.gameOver() : this.removeLife(z);
-    }
+      this.keyboardInteraction(letterToCheck);
 
     } else {
-      const a = this.checkLetter(letterToCheck);
-      letterToCheck.setAttribute("disabled", true);
 
-      a ? this.gameOver() : this.removeLife(a);
+      this.mouseInteraction(letterToCheck);
+
     }
 
   }
 
+// method takes 1 arg
   removeLife(letterFound) {
     if(!letterFound) {
      document.querySelectorAll("li.tries img")[this.missed].src = "../images/lostHeart.png";
@@ -104,16 +131,22 @@ class Game extends Phrase {
 
   }
 
-  gameOver(missed) {
-      const overlay = document.querySelector("div#overlay");
-    if(missed === 5) {
-      this.missed = 0;
+  endGameOverLay(winOrLose) {
+    const overlay = document.querySelector("div#overlay");
       overlay.style.display = "block";
-      overlay.className = "lose";
+      overlay.className = winOrLose;
+  }
+
+  gameOver(missed) {
+
+    if(missed === 5) {
+
+      this.missed = 0;
+      this.endGameOverLay("lose");
 
     } else if(this.checkForWin()) {
-      overlay.style.display = "block";
-      overlay.className= "win";
+
+      this.endGameOverLay("win");
     }
     }
 
