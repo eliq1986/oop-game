@@ -12,6 +12,7 @@ class Game extends Phrase {
 
   }
 
+
 // method returns array of obj; called when obj instantiated
   createPhrases() {
     return[
@@ -23,15 +24,18 @@ class Game extends Phrase {
   ];
   }
 
+
 // method returns random phrase
   getRandomPhrase() {
     return this.phrases[Math.floor(Math.random() * this.phrases.length)];
   }
 
+
 // method accepts 1 arg; display value for start screen
   displayOverLay(displayValue) {
     document.querySelector("div#overlay").style.display= displayValue;
   }
+
 
 // method removes previous letters if they exist
   removePhraseFromScreen() {
@@ -44,11 +48,13 @@ class Game extends Phrase {
   }
   }
 
+
 // method replaces lostHeart.png to liveHeart.png
   resetHearts() {
     const hearts = document.querySelectorAll("li.tries img");
     hearts.forEach(heart => heart.src = "../images/liveHeart.png");
   }
+
 
 // method resets keyboard to original form
   resetKeyboard() {
@@ -82,6 +88,8 @@ class Game extends Phrase {
 
     }
 
+
+// method takes 1 str arg; checks if letter matches game letter
   keyboardInteraction(letterToCheck) {
 
     const keyboardLetters = [...document.querySelectorAll("div#qwerty button")];
@@ -97,16 +105,18 @@ class Game extends Phrase {
 
   }
 
-//
+
+// method takes event.target arg; checks if letter matches game letter
   mouseInteraction(letterToCheck) {
 
     const wasLetterFound = this.checkLetter(letterToCheck);
     letterToCheck.setAttribute("disabled", true);
 
-    wasLetterFound ? this.gameOver() : this.removeLife(a);
+    wasLetterFound ? this.gameOver() : this.removeLife(wasLetterFound);
   }
 
-// method takes 1 arg event.target
+
+// method takes 1 arg event.target and checks if keyup or mouse click
   handleInteraction(letterToCheck) {
 
     if(!letterToCheck.textContent) {
@@ -121,7 +131,8 @@ class Game extends Phrase {
 
   }
 
-// method takes 1 arg
+
+// method takes 1 arg a boolean; replaces heart with gray heart if bool is false;
   removeLife(letterFound) {
     if(!letterFound) {
      document.querySelectorAll("li.tries img")[this.missed].src = "../images/lostHeart.png";
@@ -131,12 +142,16 @@ class Game extends Phrase {
 
   }
 
+
+// method takes str arg; adds className to startscreen overlay
   endGameOverLay(winOrLose) {
     const overlay = document.querySelector("div#overlay");
       overlay.style.display = "block";
       overlay.className = winOrLose;
   }
 
+
+// method takes 1 number arg; checks if player missed or correctly guessed phrase
   gameOver(missed) {
 
     if(missed === 5) {
@@ -147,16 +162,16 @@ class Game extends Phrase {
     } else if(this.checkForWin()) {
 
       this.endGameOverLay("win");
+
     }
     }
 
+// method takes no arg; compares length of two collections.If length matches user wins.
   checkForWin() {
     const lettersOnBoard = document.querySelectorAll("li[letter]");
     const lettersWithShowClass = document.querySelectorAll("li.show");
-    if(lettersWithShowClass.length == lettersOnBoard.length){
-      return true;
-    }
-     return false;
+    return lettersWithShowClass.length == lettersOnBoard.length ? true : false;
+
   }
 
 }
