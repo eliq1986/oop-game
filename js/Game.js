@@ -68,7 +68,7 @@ class Game extends Phrase {
     // method replaces lostHeart.png to liveHeart.png
     resetHearts() {
         const hearts = document.querySelectorAll("li.tries img");
-        hearts.forEach(heart => heart.src = "../images/liveHeart.png");
+        hearts.forEach(heart => heart.src = "./images/liveHeart.png");
     }
 
 
@@ -87,6 +87,7 @@ class Game extends Phrase {
         this.resetHearts();
         this.removePhraseFromScreen();
         this.resetKeyboard();
+        this.missed = 0;
     }
 
 
@@ -95,6 +96,7 @@ class Game extends Phrase {
 
       if(this.activePhrase) {
         this.gameReset();
+
       }
 
 
@@ -153,8 +155,8 @@ class Game extends Phrase {
     // method takes 1 arg a boolean; replaces heart with gray heart if bool is false;
     removeLife(letterFound) {
         if (!letterFound) {
-          this.showThanos();
-            document.querySelectorAll("li.tries img")[this.missed].src = "../images/lostHeart.png";
+            this.showThanos();
+            document.querySelectorAll("li.tries img")[this.missed].src = "./images/lostHeart.png";
             this.missed += 1;
             this.gameOver(this.missed);
         }
@@ -179,7 +181,6 @@ class Game extends Phrase {
 
         if (missed === 5) {
 
-            this.missed = 0;
             this.endGameOverLay("lose");
 
 

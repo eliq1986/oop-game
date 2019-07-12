@@ -159,6 +159,11 @@ button {
   border-right: solid 3px rgba(0, 0, 0, 0);
 }
 
+button#btn__reset:hover {
+  border: 2px solid red;
+
+}
+
 
 /* Overlay */
 
@@ -214,42 +219,16 @@ img.thanos {
 }
 img.showThanos {
 
-  width: 350px;
+  width: 250px;
   animation: showThanos 1s;
-  animation-fill-mode:forwards
+
 }
 div#thanos-container {
   position: absolute;
   z-index: 1;
 }
 
-@keyframes startOfGame {
-    0% {
-    opacity: .1;
-    transform: translateY(-700%) rotate(7deg);
-    }
-    20% {
-     transform: translateY(-500%) rotate(-7deg);
-    }
-    80% {
-           transform: translateY(-180%) rotate(7deg);
-    }
-    100% {
-
-      transform: translateY(-2%);
-    }
-}
-
 @keyframes showThanos {
-  /* 0%{
-    transform: translateY(800%);
-    opacity: 1;
-  }
-
-  100% {
-
-  } */
-
   0% {
     transform: translateX(-5px);
   }
@@ -271,11 +250,18 @@ div#thanos-container {
   25% {
     transform: translateX(0);
   }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    display: none;
-  }
+}
+
+
+/* title drop down */
+@keyframes startOfGame {
+    0% {
+      transform: translateY(-800%);
+    }
+    80% {
+      transform: translateY(10%);
+    } 100% {
+      transform: translateY(0);
+    }
+
 }
