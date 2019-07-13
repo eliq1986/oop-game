@@ -7,7 +7,7 @@ class Game extends Phrase {
         this.missed = missed;
         this.phrases = this.createPhrases();
         this.activePhrase = activePhrase;
-        this.win = "Great job you won!!";
+        this.win = "You went for the head!!";
         this.lose = "You could not live with your own failure. Where did that bring you? Back to me";
         this.gameFinished = false;
     }
@@ -16,19 +16,19 @@ class Game extends Phrase {
     // method returns array of obj; called when obj instantiated
     createPhrases() {
         return [{
-                phrase: "may the force be with you"
+                phrase: "I can do this all day"
             },
             {
-                phrase: "carpe diem"
+                phrase: "Some people move on but not us"
             },
             {
-                phrase: "To infinity and beyond"
+                phrase: "Avengers Assemble"
             },
             {
-                phrase: "I am your father"
+                phrase: "You should have gone for the head"
             },
             {
-                phrase: "Why so serious"
+                phrase: "The hardest choices require the strongest wills"
             }
         ];
     }

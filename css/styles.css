@@ -184,6 +184,8 @@ button#btn__reset:hover {
   color: #FFF;
   animation: startOfGame 9.8s ease-out;
   animation-iteration-count: 1;
+  font-size: 6em;
+  letter-spacing: 40px;
 }
 
 .start {
@@ -207,7 +209,8 @@ button#btn__reset:hover {
 }
 
 .win {
-  background-color: var(--color-win);
+  background: url("../images/iron_man.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .win a {
@@ -215,7 +218,8 @@ button#btn__reset:hover {
 }
 
 .lose {
-  background-color: #f5785f;
+  background: url("../images/thanos_sitting.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .lose a {
@@ -281,15 +285,10 @@ div#thanos-container {
 
 
 @keyframes showAvengersBackGround {
-  0% {
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 0.5
-  }
-
-  100% {
-    opacity: 1;
-
-  }
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
 }
