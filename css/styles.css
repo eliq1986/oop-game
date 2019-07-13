@@ -186,6 +186,7 @@ button#btn__reset:hover {
   animation-iteration-count: 1;
   font-size: 6em;
   letter-spacing: 40px;
+  text-shadow: 5px 1px black;
 }
 
 .start {

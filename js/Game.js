@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * Game.js */
 class Game extends Phrase {
-    constructor(missed = 0, phrases = [], activePhrase = null, gameFinished=false) {
+    constructor(missed = 0, phrases = [], activePhrase = null) {
         super();
         this.missed = missed;
         this.phrases = this.createPhrases();
@@ -10,6 +10,7 @@ class Game extends Phrase {
         this.win = "You went for the head!!";
         this.lose = "You could not live with your own failure. Where did that bring you? Back to me";
         this.gameFinished = false;
+        this.avengers = ["americans_ass.png", "iron_man.png", "thor.png"];
     }
 
 
@@ -33,7 +34,26 @@ class Game extends Phrase {
         ];
     }
 
-    showThanos() {
+// method takes 0 arg returns random avenger hero
+    getAvenger() {
+      return this.avengers[Math.floor(Math.random() * this.avengers.length)];
+    }
+
+
+// method takes a boolean arg and sets src property to villan or hero
+    showThanos(bool) {
+      const marvelImage = document.querySelector(".thanos");
+
+      switch (bool) {
+
+        case true:
+            marvelImage.src = `images/${this.getAvenger()}`;
+          break;
+        case false:
+            marvelImage.src = "images/thanos.png";
+          break;
+      }
+
       document.querySelector("img.thanos").className ="showThanos";
       setTimeout(()=> {
         document.querySelector("img.showThanos").className ="thanos";
@@ -119,7 +139,7 @@ class Game extends Phrase {
         if (letterToDisable[0].className === "key") {
 
             const wasLetterFound = this.checkLetter(letterToDisable[0]);
-
+            this.showThanos(wasLetterFound);
             wasLetterFound ? this.gameOver() : this.removeLife(wasLetterFound);
 
         }
@@ -132,7 +152,7 @@ class Game extends Phrase {
 
         const wasLetterFound = this.checkLetter(letterToCheck);
         letterToCheck.setAttribute("disabled", true);
-
+        this.showThanos(wasLetterFound);
         wasLetterFound ? this.gameOver() : this.removeLife(wasLetterFound);
     }
 
@@ -155,8 +175,8 @@ class Game extends Phrase {
 
     // method takes 1 arg a boolean; replaces heart with gray heart if bool is false;
     removeLife(letterFound) {
+
         if (!letterFound && !this.checkForWin()) {
-            this.showThanos();
             document.querySelectorAll("li.tries img")[this.missed].src = "./images/lostHeart.png";
             this.missed += 1;
             this.gameOver(this.missed);
