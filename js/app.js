@@ -26,8 +26,9 @@ document.addEventListener("keyup", event => {
 
     if (keyboardRegrex.test(event.key) &&
         startScreen.style.display == "none" &&
-        document.querySelector("img.thanos")) 
+        document.querySelector("img.thanos"))
     {
+
         game.handleInteraction(event.key.toLowerCase());
     }
 

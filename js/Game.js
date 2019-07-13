@@ -166,6 +166,7 @@ class Game extends Phrase {
 
     // method takes str arg; adds className to startscreen overlay
     endGameOverLay(winOrLose) {
+
       setTimeout(()=> {
         const overlay = document.querySelector("div#overlay");
         overlay.style.display = "block";
@@ -179,13 +180,12 @@ class Game extends Phrase {
     // method takes 1 number arg; checks if player missed or correctly guessed phrase
     gameOver(missed) {
 
-        if (missed === 5) {
-
+        if (missed === 5 && !this.checkForWin()) {
             this.endGameOverLay("lose");
 
 
         } else if (this.checkForWin()) {
-
+        
             this.endGameOverLay("win");
 
         }
@@ -193,6 +193,7 @@ class Game extends Phrase {
 
     // method takes no arg; compares length of two collections.If length matches user wins.
     checkForWin() {
+
         const lettersOnBoard = document.querySelectorAll("li[letter]");
         const lettersWithShowClass = document.querySelectorAll("li.show");
         return lettersWithShowClass.length == lettersOnBoard.length ? true : false;
