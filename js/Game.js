@@ -2,14 +2,14 @@
  * Project 4 - OOP Game App
  * Game.js */
 class Game extends Phrase {
-    constructor(missed = 0, phrases = [], activePhrase = null) {
+    constructor(missed = 0, phrases = [], activePhrase = null, gameFinished=false) {
         super();
         this.missed = missed;
         this.phrases = this.createPhrases();
         this.activePhrase = activePhrase;
         this.win = "Great job you won!!";
-        this.lose = "“Winning is great, sure, but if you are really going to do something in life, the secret is learning how to lose, try again";
-
+        this.lose = "You could not live with your own failure. Where did that bring you? Back to me";
+        this.gameFinished = false;
     }
 
 
@@ -88,6 +88,7 @@ class Game extends Phrase {
         this.removePhraseFromScreen();
         this.resetKeyboard();
         this.missed = 0;
+        this.gameFinished = false;
     }
 
 
@@ -154,7 +155,7 @@ class Game extends Phrase {
 
     // method takes 1 arg a boolean; replaces heart with gray heart if bool is false;
     removeLife(letterFound) {
-        if (!letterFound) {
+        if (!letterFound && !this.checkForWin()) {
             this.showThanos();
             document.querySelectorAll("li.tries img")[this.missed].src = "./images/lostHeart.png";
             this.missed += 1;
@@ -181,11 +182,11 @@ class Game extends Phrase {
     gameOver(missed) {
 
         if (missed === 5 && !this.checkForWin()) {
+            this.gameFinished = true;
             this.endGameOverLay("lose");
 
-
         } else if (this.checkForWin()) {
-        
+            this.gameFinished = true;
             this.endGameOverLay("win");
 
         }

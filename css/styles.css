@@ -171,7 +171,7 @@ button#btn__reset:hover {
   display: flex;
   flex-direction: column;
   position: fixed;
-  color: #FFFFFF;
+  color: #ffffff;
   justify-content: center;
   top: 0;
   bottom: 0;
@@ -182,12 +182,24 @@ button#btn__reset:hover {
 
 .title {
   color: #FFF;
-  animation: startOfGame 2.4s ease-out;
+  animation: startOfGame 9.8s ease-out;
   animation-iteration-count: 1;
 }
 
 .start {
   background-color: #3a3f58;
+  animation: hideColorBackGround 4s ease-in;
+  z-index: 1;
+  animation-fill-mode: forwards;
+
+}
+
+ .endgame {
+  background: url("../images/avengers.jpg") no-repeat center center fixed;
+  background-size: cover;
+  animation: showAvengersBackGround 4s ease-in;
+  animation-fill-mode: forwards;
+
 }
 
 .start a {
@@ -264,4 +276,20 @@ div#thanos-container {
       transform: translateY(0);
     }
 
+}
+
+
+
+@keyframes showAvengersBackGround {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 1;
+
+  }
 }

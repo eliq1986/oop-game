@@ -13,7 +13,7 @@ document.querySelector("button#btn__reset").addEventListener("click", () => {
 
 // listens to buttons "clicked" on only
 document.querySelector("div#qwerty").addEventListener("click", event => {
-   if(document.querySelector("img.thanos")) {
+   if(document.querySelector("img.thanos") && !game.gameFinished) {
     event.target.tagName === "BUTTON" ? game.handleInteraction(event.target) : null;
    }
 
@@ -26,7 +26,9 @@ document.addEventListener("keyup", event => {
 
     if (keyboardRegrex.test(event.key) &&
         startScreen.style.display == "none" &&
-        document.querySelector("img.thanos"))
+        document.querySelector("img.thanos") &&
+        !game.gameFinished
+      )
     {
 
         game.handleInteraction(event.key.toLowerCase());
