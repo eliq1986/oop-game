@@ -84,10 +84,19 @@
 		<iframe src="https://ia801205.us.archive.org/0/items/TheAvengersThemeSong/The%20Avengers%20Theme%20Song.mp3" controls allow="autoplay" loop  style="display:none" id="iframeAudio">
 		</iframe>
 
-		<audio preload="auto" loop  autobuffer id="playAudio">
+<!-- Required for opera audio -->
+<audio preload="auto" loop  autobuffer id="playAudio">
 	  <source src="https://ia801205.us.archive.org/0/items/TheAvengersThemeSong/The%20Avengers%20Theme%20Song.mp3" />
 	  <source src="https://ia801205.us.archive.org/0/items/TheAvengersThemeSong/The%20Avengers%20Theme%20Song.mp3" /> <!-- fallback if no mp3 support in browser -->
 </audio>
+
+<!-- Required for firefox audio -->
+<audio autoplay>
+   <source src="https://ia801205.us.archive.org/0/items/TheAvengersThemeSong/The%20Avengers%20Theme%20Song.mp3" type="audio/mp3">
+   <source src="https://ia801205.us.archive.org/0/items/TheAvengersThemeSong/The%20Avengers%20Theme%20Song.ogg" type="audio/ogg">
+</audio>
+
+
 	</body>
 
 	<script type="text/javascript" src="js/Phrase.js"></script>
