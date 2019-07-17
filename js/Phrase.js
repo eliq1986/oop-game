@@ -9,9 +9,7 @@ class Phrase {
     // method takes no arg; appends letters to DOM
     addPhraseToDisplay() {
         const phraseSplitted = this.phrase.split("");
-        phraseSplitted.forEach(letter => {
-            this.createAndAppendElement(letter);
-        });
+        phraseSplitted.forEach(letter => this.createAndAppendElement(letter));
     }
 
 

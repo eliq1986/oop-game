@@ -2,40 +2,33 @@
  * Project 4 - OOP Game App
  * Game.js */
 class Game extends Phrase {
-    constructor(missed = 0, phrases = [], activePhrase = null) {
+    constructor() {
         super();
-        this.missed = missed;
+        this.missed = 0;
+        this.activePhrase = null;
         this.phrases = this.createPhrases();
-        this.activePhrase = activePhrase;
+        this.gameFinished = false;
         this.win = "You went for the head!!";
         this.lose = "You could not live with your own failure. Where did that bring you? Back to me";
-        this.gameFinished = false;
         this.avengers = ["americans_ass.png", "iron_man.png", "thor.png"];
     }
 
 
-    // method returns array of obj; called when obj instantiated
+    // method returns array of obj; instantiates class
     createPhrases() {
-        return [{
-                phrase: "I can do this all day"
-            },
-            {
-                phrase: "Some people move on but not us"
-            },
-            {
-                phrase: "Avengers Assemble"
-            },
-            {
-                phrase: "You should have gone for the head"
-            },
-            {
-                phrase: "The hardest choices require the strongest wills"
-            }
-        ];
+
+      const phraseArray = [
+        "I can do this all day",
+        "Some people move on but not us",
+        "Avengers Assemble","You should have gone for the head",
+        "The hardest choices require the strongest wills"
+      ];
+
+        return phraseArray.map((string) => new Phrase(string));
     }
 
 // method takes 0 arg returns random avenger hero
-    getAvenger() {
+    getRandomAvenger () {
       return this.avengers[Math.floor(Math.random() * this.avengers.length)];
     }
 
@@ -45,9 +38,8 @@ class Game extends Phrase {
       const marvelImage = document.querySelector(".thanos");
 
       switch (bool) {
-
         case true:
-            marvelImage.src = `images/${this.getAvenger()}`;
+            marvelImage.src = `images/${this.getRandomAvenger()}`;
           break;
         case false:
             marvelImage.src = "images/thanos.png";
@@ -94,8 +86,7 @@ class Game extends Phrase {
 
     // method resets keyboard to original form
     resetKeyboard() {
-        const keyboardLetters = document.querySelectorAll("div#qwerty button");
-        keyboardLetters.forEach(letter => {
+         document.querySelectorAll("div#qwerty button").forEach(letter => {
             letter.className = "key";
             letter.removeAttribute("disabled");
         });
@@ -114,18 +105,11 @@ class Game extends Phrase {
 
     // method runs when start button is clicked
     startGame() {
-
-      if(this.activePhrase) {
         this.gameReset();
-
-      }
-
-
         this.displayOverLay("none");
-        const phrase = new Phrase(this.getRandomPhrase().phrase);
+        const phrase = this.getRandomPhrase();
         phrase.addPhraseToDisplay();
         this.activePhrase = phrase.phrase;
-
     }
 
 

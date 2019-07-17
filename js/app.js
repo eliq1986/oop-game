@@ -3,12 +3,13 @@
  * app.js */
 
 
-const game = new Game();
-
+let game;
 
 // listens to start button
 document.querySelector("button#btn__reset").addEventListener("click", () => {
+    game = new Game();
     game.startGame();
+
 });
 
 // listens to buttons "clicked" on only
