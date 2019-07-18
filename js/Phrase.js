@@ -1,6 +1,7 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
+ 
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase;
@@ -37,12 +38,11 @@ class Phrase {
             li.classList.add("letter", "hide");
             li.textContent = letter;
             li.setAttribute("letter", letter.toLowerCase());
-            phraseContainer.appendChild(li);
         } else {
             li.classList.add("space", "hide");
             li.textContent = letter;
-            phraseContainer.appendChild(li);
         }
+            phraseContainer.appendChild(li);
 
     }
 

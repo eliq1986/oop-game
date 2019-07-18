@@ -7,7 +7,6 @@ class Game extends Phrase {
         this.missed = 0;
         this.activePhrase = null;
         this.phrases = this.createPhrases();
-        this.gameFinished = false;
         this.win = "You went for the head!!";
         this.lose = "You could not live with your own failure. Where did that bring you? Back to me";
         this.avengers = ["americans_ass.png", "iron_man.png", "thor.png"];
@@ -98,8 +97,6 @@ class Game extends Phrase {
         this.resetHearts();
         this.removePhraseFromScreen();
         this.resetKeyboard();
-        this.missed = 0;
-        this.gameFinished = false;
     }
 
 
@@ -186,13 +183,10 @@ class Game extends Phrase {
     gameOver(missed) {
 
         if (missed === 5 && !this.checkForWin()) {
-            this.gameFinished = true;
             this.endGameOverLay("lose");
 
         } else if (this.checkForWin()) {
-            this.gameFinished = true;
             this.endGameOverLay("win");
-
         }
     }
 
